@@ -1,3 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">android-mini-app-cloyster</string>
+    <string name="app_name">Quiz App</string>
+    <string name="edit_message">Take a quiz!</string>
+    <string name="button_send">Send</string>
 </resources>
