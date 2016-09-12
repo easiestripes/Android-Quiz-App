@@ -6,7 +6,8 @@ package cloyster.android_mini_app_cloyster;
 import java.util.Arrays;
 import java.util.List;
 
-public class musicQuiz implements Quiz{
+
+/*public class musicQuiz implements Quiz{
 
     // Categories for each answer
     private static final int WRONG = 0;
@@ -666,5 +667,7 @@ public class musicQuiz implements Quiz{
             results[i] = 0;
         }
     }
-}
+
+}*/
+
 
