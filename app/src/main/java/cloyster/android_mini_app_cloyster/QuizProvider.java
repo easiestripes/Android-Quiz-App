@@ -16,7 +16,6 @@ public class QuizProvider {
 
         unfinished_quizzes.add("Quiz 1");
         unfinished_quizzes.add("Quiz 2");
-
         quizMap.put("Unfinished", unfinished_quizzes);
         quizMap.put("Finished", finished_quizzes);
 
