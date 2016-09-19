@@ -15,6 +15,7 @@ import android.widget.Toast;
  * http://stackoverflow.com/questions/3328757/how-to-click-or-tap-on-a-textview-text
  */
 
+
 public class MainActivity extends AppCompatActivity {
     public String quiz1Result;
     public QuizProvider qp;
