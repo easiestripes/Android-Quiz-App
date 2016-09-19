@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == 2){
            quiz1Result = data.getStringExtra("RESULT");
             Toast.makeText(this, quiz1Result, Toast.LENGTH_SHORT).show();
+
         }
 
     }
