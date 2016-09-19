@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.Toast;
+import android.util.Log;
 
 /**
  * Sources used:
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     public String quiz1Result;
+    public String quiz2Result;
     public QuizProvider qp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,20 +43,26 @@ public class MainActivity extends AppCompatActivity {
 
     public void startQuiz1(View v) {
         Intent intent = new Intent(MainActivity.this, Quiz_1.class);
-        startActivity(intent);
+        startActivityForResult(intent, 2);
     }
 
     public void startQuiz2(View v) {
         Intent intent = new Intent(MainActivity.this, Quiz_2.class);
         startActivity(intent);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 2){
            quiz1Result = data.getStringExtra("RESULT");
-            Toast.makeText(this, quiz1Result, Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(this, "Myers Briggs Results: " + quiz1Result, Toast.LENGTH_LONG).show();
+//            Log.i("TEST ======== ", quiz1Result);
+        }
+        if(requestCode == 3){
+            quiz2Result = data.getStringExtra("RESULT");
+            Toast.makeText(this, "Music Trivia Results: " + quiz2Result, Toast.LENGTH_LONG).show();
+//            Log.i("TEST ======== ", quiz1Result);
         }
 
     }
