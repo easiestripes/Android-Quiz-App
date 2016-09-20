@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.Toast;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     public String quiz1Result;
+    public String quiz2Result;
     public QuizProvider qp;
     public ArrayList<String> unfinishedStringList, finishedStringList;
     public ArrayAdapter unfin_adapter, fin_adapter;
@@ -95,8 +97,7 @@ public class MainActivity extends AppCompatActivity {
         currPos = pos;
         startActivityForResult(intent, currPos);
     }
-
-
+    
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -107,9 +108,16 @@ public class MainActivity extends AppCompatActivity {
         unfinishedStringList.remove(currPos);
         unfin_adapter.notifyDataSetChanged();
 
-        if(requestCode == 0) {
+        if(requestCode == 0){
             quiz1Result = data.getStringExtra("RESULT");
-            Toast.makeText(this, quiz1Result, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Myers Briggs Results: " + quiz1Result, Toast.LENGTH_LONG).show();
+            // Log.i("TEST ======== ", quiz1Result);
+        }
+
+        if(requestCode == 1){
+            quiz2Result = data.getStringExtra("RESULT");
+            Toast.makeText(this, "Music Trivia Results: " + quiz2Result, Toast.LENGTH_LONG).show();
+            // Log.i("TEST ======== ", quiz1Result);
         }
     }
 }
