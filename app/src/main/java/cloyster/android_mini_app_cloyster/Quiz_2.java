@@ -45,7 +45,6 @@ public class Quiz_2 extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.i("Intent Example", "Activity 2 onStart");
         mq = new MusicQuiz();
         mq.resetResults();
         qq = mq.getQuestions();
@@ -75,36 +74,23 @@ public class Quiz_2 extends AppCompatActivity {
                 nextQuestion(i, b1, b2, q);
             }
         });
-
-        //Toast.makeText(this, String(qq.get(0)), Toast.LENGTH_SHORT).show();
     }
 
     public void nextQuestion(int i, Button b1, Button b2, TextView q){
         if(i == qq.size()) {
             q.setText("Your score is: " + mq.getResult());
+            b2.setVisibility(View.GONE);
             b1.setText("Tap here to go back to the home screen!");
-            b2.setText("Tap here to go back to the home screen!");
             b1.setOnClickListener(new OnClickListener() {
                 public void onClick(View v) {
                     Intent data = new Intent();
                     String text = mq.getResult();
                     data.putExtra("RESULT", text);
-                    setResult(3, data);
+                    setResult(1, data);
                     finish();
                 }
             });
-            b2.setOnClickListener(new OnClickListener() {
-                public void onClick(View v) {
-                    Intent data = new Intent();
-                    String text = mq.getResult();
-                    data.putExtra("RESULT", text);
-                    setResult(3, data);
-                    finish();
-                }
-            });
-
-        }
-        else {
+        } else {
             String quest = qq.get(i).getText();
             String C1 = qq.get(i).getAnswers()[0].getText();
             String C2 = qq.get(i).getAnswers()[1].getText();

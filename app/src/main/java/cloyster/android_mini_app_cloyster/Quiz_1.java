@@ -45,7 +45,6 @@ public class Quiz_1 extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.i("Intent Example", "Activity 2 onStart");
         mb = new MyersBriggsQuiz();
         mb.resetResults();
         qq = mb.getQuestions();
@@ -75,8 +74,6 @@ public class Quiz_1 extends AppCompatActivity {
                 nextQuestion(i, b1, b2, q);
             }
         });
-
-        //Toast.makeText(this, String(qq.get(0)), Toast.LENGTH_SHORT).show();
     }
 
     public void nextQuestion(int i, Button b1, Button b2, TextView q){
@@ -93,8 +90,7 @@ public class Quiz_1 extends AppCompatActivity {
                     finish();
                 }
             });
-        }
-        else {
+        } else {
             String quest = qq.get(i).getText();
             String C1 = qq.get(i).getAnswers()[0].getText();
             String C2 = qq.get(i).getAnswers()[1].getText();
@@ -103,7 +99,4 @@ public class Quiz_1 extends AppCompatActivity {
             b2.setText(C2);
         }
     }
-
-
-
 }

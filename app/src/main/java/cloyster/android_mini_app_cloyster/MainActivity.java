@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.Toast;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -23,9 +22,7 @@ import java.util.ArrayList;
  */
 
 public class MainActivity extends AppCompatActivity {
-    public String quiz1Result;
-    public String quiz2Result;
-    public QuizProvider qp;
+    public String quiz1Result, quiz2Result;
     public ArrayList<String> unfinishedStringList, finishedStringList;
     public ArrayAdapter unfin_adapter, fin_adapter;
     public int currPos = -1;
@@ -40,13 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
         // UNFINISHED TAB
         LinearLayout unfinished = (LinearLayout)findViewById(R.id.unfinished);
-
         unfinishedStringList = new ArrayList<String>();
-        unfinishedStringList.add("Quiz 1");
-        unfinishedStringList.add("Quiz 2");
-
-        ListArrayAdapter test = new ListArrayAdapter(this, unfinishedStringList);
-
+        unfinishedStringList.add("Myers Briggs Quiz");
+        unfinishedStringList.add("Music Quiz");
         unfin_adapter = new ArrayAdapter<String>(this, R.layout.unfinished_text_layout, unfinishedStringList);
 
         ListView unfinishedListView = (ListView) findViewById(R.id.unfinishedListView);
@@ -57,18 +50,9 @@ public class MainActivity extends AppCompatActivity {
         spec.setIndicator("Unfinished");
         host.addTab(spec);
 
-        unfinishedListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                int pos1 = ((ListView) findViewById(R.id.unfinishedListView)).getPositionForView(v);
-                Log.i("TEST", "Position: " + pos1);
-            }
-        });
-
         // FINISHED TAB
         LinearLayout finished = (LinearLayout)findViewById(R.id.finished);
-
         finishedStringList = new ArrayList<String>();
-
         fin_adapter = new ArrayAdapter<String>(this, R.layout.finished_text_layout, finishedStringList);
 
         ListView finishedListView = (ListView) findViewById(R.id.finishedListView);
@@ -80,24 +64,6 @@ public class MainActivity extends AppCompatActivity {
         host.addTab(spec);
     }
 
-    public void displayToast(View v) {
-        int pos = ((ListView) findViewById(R.id.finishedListView)).getPositionForView(v);
-        Log.i("TEST", "Position: " + pos);
-    }
-
-    public void startQuiz(View v) {
-        Intent intent = null;
-        int pos = ((ListView) findViewById(R.id.unfinishedListView)).getPositionForView(v);
-
-        if(pos == 0)
-            intent = new Intent(MainActivity.this, Quiz_1.class);
-        else if(pos == 1)
-            intent = new Intent(MainActivity.this, Quiz_2.class);
-
-        currPos = pos;
-        startActivityForResult(intent, currPos);
-    }
-    
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -108,16 +74,37 @@ public class MainActivity extends AppCompatActivity {
         unfinishedStringList.remove(currPos);
         unfin_adapter.notifyDataSetChanged();
 
-        if(requestCode == 0){
+        if(requestCode == 0)
             quiz1Result = data.getStringExtra("RESULT");
+        else if(requestCode == 1)
+            quiz2Result = data.getStringExtra("RESULT");
+    }
+
+    public void displayToast(View v) {
+        int pos = ((ListView) findViewById(R.id.finishedListView)).getPositionForView(v);
+        String title = finishedStringList.get(pos);
+
+        if(title.equals("Myers Briggs Quiz"))
             Toast.makeText(this, "Myers Briggs Results: " + quiz1Result, Toast.LENGTH_LONG).show();
-            // Log.i("TEST ======== ", quiz1Result);
+        else if(title.equals("Music Quiz"))
+            Toast.makeText(this, "Music Trivia Results: " + quiz2Result, Toast.LENGTH_LONG).show();
+    }
+
+    public void startQuiz(View v) {
+        Intent intent = null;
+        int resultCode = -1;
+        int pos = ((ListView) findViewById(R.id.unfinishedListView)).getPositionForView(v);
+        String title = unfinishedStringList.get(pos);
+
+        if(title.equals("Myers Briggs Quiz")) {
+            intent = new Intent(MainActivity.this, Quiz_1.class);
+            resultCode = 0;
+        } else if(title.equals("Music Quiz")) {
+            intent = new Intent(MainActivity.this, Quiz_2.class);
+            resultCode = 1;
         }
 
-        if(requestCode == 1){
-            quiz2Result = data.getStringExtra("RESULT");
-            Toast.makeText(this, "Music Trivia Results: " + quiz2Result, Toast.LENGTH_LONG).show();
-            // Log.i("TEST ======== ", quiz1Result);
-        }
+        currPos = pos;
+        startActivityForResult(intent, resultCode);
     }
 }
