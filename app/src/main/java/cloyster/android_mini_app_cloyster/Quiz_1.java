@@ -82,27 +82,17 @@ public class Quiz_1 extends AppCompatActivity {
     public void nextQuestion(int i, Button b1, Button b2, TextView q){
         if(i == qq.size()) {
             q.setText("Your score is: " + mb.getResult());
+            b2.setVisibility(View.GONE);
             b1.setText("Tap here to go back to the home screen!");
-            b2.setText("Tap here to go back to the home screen!");
             b1.setOnClickListener(new OnClickListener() {
                 public void onClick(View v) {
                     Intent data = new Intent();
                     String text = mb.getResult();
                     data.putExtra("RESULT", text);
-                    setResult(2, data);
+                    setResult(0, data);
                     finish();
                 }
             });
-            b2.setOnClickListener(new OnClickListener() {
-                public void onClick(View v) {
-                    Intent data = new Intent();
-                    String text = mb.getResult();
-                    data.setData(Uri.parse(text));
-                    setResult(RESULT_OK, data);
-                    finish();
-                }
-            });
-
         }
         else {
             String quest = qq.get(i).getText();

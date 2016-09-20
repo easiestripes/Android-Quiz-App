@@ -107,7 +107,7 @@ public class MyersBriggsQuiz implements Quiz{
                         },
                         TYPE_TF
                 ),
-                new Question(
+                /*new Question(
                         "Do you prefer to work:",
                         new Answer[]{
                                 new Answer("To deadlines", CATEGORY_A),
@@ -602,7 +602,7 @@ public class MyersBriggsQuiz implements Quiz{
                                 new Answer("strength of compassion", CATEGORY_B)
                         },
                         TYPE_TF
-                ),
+                ),*/
                 new Question(
                         "Which is the greater fault:",
                         new Answer[]{
