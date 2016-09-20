@@ -100,6 +100,8 @@ public class Quiz_2 extends AppCompatActivity {
         }
     }
 
-
-
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
 }

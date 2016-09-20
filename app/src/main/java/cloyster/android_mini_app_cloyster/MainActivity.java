@@ -107,4 +107,9 @@ public class MainActivity extends AppCompatActivity {
         currPos = pos;
         startActivityForResult(intent, resultCode);
     }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
 }

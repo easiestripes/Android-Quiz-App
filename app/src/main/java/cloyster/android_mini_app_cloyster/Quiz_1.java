@@ -99,4 +99,9 @@ public class Quiz_1 extends AppCompatActivity {
             b2.setText(C2);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
 }
